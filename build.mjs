@@ -53,6 +53,7 @@ ${body}
   <p><strong>Minerals of Pakistan</strong> — independent, sourced reference.
   Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
   <a href="about/index.html">About &amp; disclaimer</a></p>
+  <p>Built and maintained by <strong>Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan</strong>.</p>
 </footer>
 ${scripts}
 </body>
@@ -237,7 +238,8 @@ await write('dist/about/index.html', shell({
   desc: 'About this site, its scope, sources, and disclaimer.',
   depth: 1, active: 'about', path: 'about/',
   body: `<div class="container">
-    <h1>About</h1>
+        <h1>About</h1>
+    <p><strong>Created and maintained by Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan).</strong></p>
     <p><strong>Minerals of Pakistan</strong> is an independent, open reference to the metallic mineral deposits of Pakistan.</p>
     <h2>Scope</h2>
     <p>Version 1 covers metallic commodities (copper, gold, lead, zinc, chromite, iron, and related metals). Coal, gemstones, and industrial minerals are planned for future versions.</p>
