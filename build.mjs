@@ -43,14 +43,14 @@ ${head}
 </head>
 <body>
 <header class="site-header">
-  <a class="brand" href="./">Minerals <span>of</span> Pakistan</a>
+  <a class="brand" href="./">Shah Nawaz <span>Ariser</span></a>
   <nav>${nav}</nav>
 </header>
 <main>
 ${body}
 </main>
 <footer>
-  <p><strong>Minerals of Pakistan</strong> — independent, sourced reference.
+  <p><strong>Shah Nawaz Ariser</strong> — independent, sourced reference.
   Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
   <a href="about/index.html">About &amp; disclaimer</a></p>
   <p>Built and maintained by <strong>Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan)</strong>.</p>
