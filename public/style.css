@@ -1,7 +1,8 @@
 :root {
   --fg: #1a1a1a; --muted: #666; --line: #e2e2e2;
-  --bg: #fff; --accent: #0b5d4b;
+  --bg: #fff; --accent: #1d4ed8;
   --warn: #fff4d6; --warnb: #e0b64a; --danger: #a32020;
+}
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
