@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minerals of Pakistan — Explorer</title>
+<meta name="description" content="A sourced, open reference to the mineral deposits of Pakistan.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="./">Minerals <span>of</span> Pakistan</a>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Search deposit, commodity, district…" aria-label="Search">
+    <select id="commodity" aria-label="Commodity"><option value="">All commodities</option></select>
+    <select id="province" aria-label="Province"><option value="">All provinces</option></select>
+  </div>
+</header>
+<main>
+  <div>
+    <div id="count"></div>
+    <nav id="list" aria-label="Deposits"></nav>
+  </div>
+  <section id="detail"><p>Select a deposit.</p></section>
+</main>
+
+<script type="module">
+import { esc, renderDetail } from './render.js';
+
+const $q=document.getElementById('q'), $c=document.getElementById('commodity'),
+      $p=document.getElementById('province'), $list=document.getElementById('list'),
+      $detail=document.getElementById('detail'), $count=document.getElementById('count');
+
+let D = { meta:{}, deposits:[], sources:[] };
+const srcMap = () => Object.fromEntries(D.sources.map(s => [s.id, s]));
+
+function fill(el, vals) {
+  [...new Set(vals.filter(Boolean))].sort().forEach(v => {
+    const o = document.createElement('option');
+    o.value = v; o.textContent = v;
+    el.appendChild(o);
+  });
+}
+
+function filtered() {
+  const q = $q.value.trim().toLowerCase(), com = $c.value, prov = $p.value;
+  return D.deposits.filter(d => {
+    if (com && !(d.commodities||[]).includes(com) && !(d.byProducts||[]).includes(com)) return false;
+    if (prov && d.province !== prov) return false;
+    if (!q) return true;
+    const hay = [d.name, d.depositType, d.province, d.district, d.operator,
+      d.hostFormation, d.hostRock, d.tectonicDomain,
+      ...(d.commodities||[]), ...(d.byProducts||[])].join(' ').toLowerCase();
+    return q.split(/\s+/).every(t => hay.includes(t));
+  });
+}
+
+function renderList() {
+  const hits = filtered();
+  $count.textContent = `${hits.length} deposit${hits.length===1?'':'s'}`;
+  $list.innerHTML = hits.length
+    ? hits.map(d => `<button data-id="${esc(d.id)}">${esc(d.name)}
+        <small>${esc((d.commodities||[]).join(', '))} · ${esc(d.district || d.province || '')}</small>
+      </button>`).join('')
+    : '<p style="padding:1rem;color:#666">No matches.</p>';
+  $list.querySelectorAll('button').forEach(b =>
+    b.addEventListener('click', () => show(b.dataset.id)));
+  const a = location.hash.slice(1);
+  if (a) $list.querySelectorAll('button').forEach(b =>
+    b.classList.toggle('active', b.dataset.id === a));
+}
+
+function show(id) {
+  const d = D.deposits.find(x => x.id === id);
+  if (!d) return;
+  $detail.innerHTML = renderDetail(d, srcMap(), D.meta);
+  $list.querySelectorAll('button').forEach(b =>
+    b.classList.toggle('active', b.dataset.id === id));
+  history.replaceState(null, '', '#' + id);
+  $detail.scrollIntoView({ block: 'start' });
+}
+
+fetch('deposits.json')
+  .then(r => r.json())
+  .then(data => {
+    D = { meta: data.meta || {}, deposits: data.deposits || [], sources: data.sources || [] };
+    fill($c, D.deposits.flatMap(d => [...(d.commodities||[]), ...(d.byProducts||[])]));
+    fill($p, D.deposits.map(d => d.province));
+    renderList();
+    const start = location.hash.slice(1) || D.deposits[0]?.id;
+    if (start) show(start);
+  })
+  .catch(() => { $detail.innerHTML = '<p>Could not load deposits.json.</p>'; });
+
+[$q, $c, $p].forEach(el => el.addEventListener('input', renderList));
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+</script>
+</body>
+</html>
