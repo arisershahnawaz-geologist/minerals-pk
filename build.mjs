@@ -43,7 +43,7 @@ ${head}
 </head>
 <body>
 <header class="site-header">
-  <a class="brand" href="./">Shah Nawaz <span>Ariser</span></a>
+  <a class="brand" href="./">Minerals<span>of</span>Pakistan</a>
   <nav>${nav}</nav>
 </header>
 <main>
