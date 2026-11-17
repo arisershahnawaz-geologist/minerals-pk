@@ -1,8 +1,8 @@
-{
-  "meta": {
-    "version": "0.1.0",
-    "license": "CC BY 4.0",
-    "updated": "2026-11-17",
+"meta": {
+  "version": "0.1.0",
+  "license": "CC BY 4.0",
+  "author": "Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan)",
+  "updated": "2026-11-17",
     "disclaimer": "Seed records for structure only. All resource figures and coordinates must be verified against primary sources before publication."
   },
   "deposits": [
