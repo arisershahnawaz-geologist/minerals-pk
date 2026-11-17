@@ -53,7 +53,7 @@ ${body}
   <p><strong>Minerals of Pakistan</strong> — independent, sourced reference.
   Data <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
   <a href="about/index.html">About &amp; disclaimer</a></p>
-  <p>Built and maintained by <strong>Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan</strong>.</p>
+  <p>Built and maintained by <strong>Shah Nawaz Ariser (Assistant Director, Geological Survey of Pakistan)</strong>.</p>
 </footer>
 ${scripts}
 </body>
